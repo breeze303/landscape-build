@@ -1,0 +1,75 @@
+# Config Interface
+[[ifaces]]
+name = "eth0"
+zone_type = "wan"
+
+[[ipconfigs]]
+iface_name = "eth0"
+enable = true
+
+[ipconfigs.ip_model]
+t = "dhcpclient"
+default_router=true
+
+[[ifaces]]
+name = "br_lan"
+create_dev_type = "bridge"
+zone_type = "lan"
+
+[[ifaces]]
+name = "eth1"
+controller_name = "br_lan"
+
+[[dhcpv4_services]]
+iface_name = "br_lan"
+enable = true
+
+[dhcpv4_services.config]
+server_ip_addr = "192.168.20.1"
+ip_range_start = "192.168.20.100"
+network_mask = 24
+
+[[ifaces]]
+name = "wlan0"
+controller_name = "br_lan"
+enable_in_boot=true
+wifi_mode="ap"
+
+[[wifi_configs]]
+iface_name="wlan0"
+enable=true
+config="""
+# 基本接口配置
+interface=wlan0
+driver=nl80211
+
+# WiFi 6核心设置
+hw_mode=a
+ieee80211n=1
+ieee80211ac=1
+ieee80211ax=1
+wmm_enabled=1
+
+# 网络标识
+ssid=Landscape-test
+country_code=CN
+
+# 5GHz频段配置
+channel=36
+ht_capab=[HT40+][SHORT-GI-20][SHORT-GI-40]
+
+# 使用基础VHT配置
+vht_capab=[SHORT-GI-80]
+vht_oper_chwidth=0
+
+# 安全认证
+auth_algs=1
+wpa=2
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMP
+wpa_passphrase=landscapetest
+
+# 简化HE配置
+he_oper_chwidth=0
+he_su_beamformer=1
+"""

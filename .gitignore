@@ -1,0 +1,5 @@
+userpatches/*
+!userpatches/customize-image.sh
+!userpatches/overlay
+output/*
+output/*

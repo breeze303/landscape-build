@@ -1,0 +1,29 @@
+# Config Interface
+[[ifaces]]
+name = "wan"
+zone_type = "wan"
+
+[[ifaces]]
+name = "br_lan"
+create_dev_type = "bridge"
+zone_type = "lan"
+
+[[ifaces]]
+name = "lan"
+controller_name = "br_lan"
+
+[[ipconfigs]]
+iface_name = "wan"
+enable = true
+
+[ipconfigs.ip_model]
+t = "dhcpclient"
+
+[[dhcpv4_services]]
+iface_name = "br_lan"
+enable = true
+
+[dhcpv4_services.config]
+server_ip_addr = "192.168.20.1"
+ip_range_start = "192.168.20.100"
+network_mask = 24
