@@ -60,7 +60,7 @@ EOF
 		else
 			# 文件不存在，进行下载
 			echo "下载 landscape-webserver..."
-			curl -L -o /root/landscape-webserver https://github.com/ThisSeanZhang/landscape/releases/download/v0.4.10-beta/landscape-webserver-x86_64
+			curl -L -o /root/landscape-webserver https://github.com/ThisSeanZhang/landscape/releases/download/v0.4.11-beta/landscape-webserver-x86_64
 		fi
 		sudo sed -i 's/^GRUB_CMDLINE_LINUX="/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0 /' /etc/default/grub
 		sudo update-grub
@@ -71,7 +71,7 @@ EOF
 		else
 			# 文件不存在，进行下载
 			echo "下载 landscape-webserver..."
-			curl -L -o /root/landscape-webserver https://github.com/ThisSeanZhang/landscape/releases/download/v0.4.10-beta/landscape-webserver-aarch64
+			curl -L -o /root/landscape-webserver https://github.com/ThisSeanZhang/landscape/releases/download/v0.4.11-beta/landscape-webserver-aarch64
 		fi
 		# 当 BOARD 为其他值时执行的操作
 		cat /boot/armbianEnv.txt
@@ -82,7 +82,7 @@ EOF
 	mkdir -p /root/.landscape-router/
 	cp "/tmp/overlay/landscape_init-${BOARD}.toml" "/root/.landscape-router/landscape_init.toml"
 	chmod +x /root/landscape-webserver
-	curl -L -o /root/static.zip https://github.com/ThisSeanZhang/landscape/releases/download/v0.4.10-beta/static.zip
+	curl -L -o /root/static.zip https://github.com/ThisSeanZhang/landscape/releases/download/v0.4.11-beta/static.zip
 	unzip /root/static.zip -d /root/.landscape-router
 	cat <<EOF > /etc/systemd/system/landscape-router.service
 [Unit]
