@@ -82,7 +82,14 @@ EOF
 	mkdir -p /root/.landscape-router/
 	cp "/tmp/overlay/landscape_init-${BOARD}.toml" "/root/.landscape-router/landscape_init.toml"
 	chmod +x /root/landscape-webserver
-	curl -L -o /root/static.zip https://github.com/ThisSeanZhang/landscape/releases/latest/download/static.zip
+	if [ -f "/tmp/overlay/static.zip" ]; then
+		echo "static.zip 文件已存在，直接复制..."
+		cp /tmp/overlay/static.zip /root/static.zip
+	else
+		# 文件不存在，进行下载
+		echo "下载 static.zip..."
+		curl -L -o /root/static.zip https://github.com/ThisSeanZhang/landscape/releases/latest/download/static.zip
+	fi
 	unzip /root/static.zip -d /root/.landscape-router
 	cat <<EOF > /etc/systemd/system/landscape-router.service
 [Unit]
@@ -94,6 +101,7 @@ Requires=docker.service
 ExecStart=/root/landscape-webserver
 Restart=always
 User=root
+LimitMEMLOCK=infinity
 
 [Install]
 WantedBy=multi-user.target

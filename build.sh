@@ -5,8 +5,8 @@ cd armbian
 # 定义不同板子的编译参数
 declare -A BOARD_CONFIGS=(
     # 格式: ["BOARD_NAME"]="BRANCH BUILD_DESKTOP BUILD_MINIMAL ..."
-    ["x86_84"]="current no yes"
-    ["mangopi-m28k"]="vendor no no"
+    ["uefi-x86"]="current no yes"
+    ["mangopi-m28k"]="vendor no yes"
     ["nanopi-r5c"]="current no yes"
     # 可以继续添加其他板子
 )
